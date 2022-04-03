@@ -28,3 +28,8 @@ def remove_cairo_package(package):
     settings = benedict("./pyproject.toml")
     settings.remove(f"felucca.contracts.{package}")
     settings.to_toml()
+
+
+def get_package_name():
+    settings = benedict("./pyproject.toml")
+    return settings["tool.poetry.name"]
