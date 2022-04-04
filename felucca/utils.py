@@ -15,7 +15,9 @@ def is_felucca_package(package: str):
 def find_dependency_version(package: str) -> str:
 
     lock = toml.load("./poetry.lock")
-    return lock["package"][f"{package}"]["version"]
+    for package_details in lock["package"]:
+        if package in package_details["name"]:
+            return package_details["version"]
 
 
 def set_cairo_package(package: str, version: str):
