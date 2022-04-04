@@ -51,7 +51,7 @@ def get_package_name() -> str:
 
 
 def install_cairo_package(package):
-    site_packages = site.getsitepackages()
+    site_packages = site.getsitepackages()[0]
     norm_package = package.replace("-", "_")
     package_contracts = os.path.join(site_packages, norm_package)
     target_dir = f"./{get_package_name()}/{norm_package}"
