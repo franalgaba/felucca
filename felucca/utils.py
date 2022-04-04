@@ -1,5 +1,9 @@
-import requests
+import site
+import os
+import shutil
+from pathlib import Path
 
+import requests
 import toml
 
 
@@ -24,6 +28,9 @@ def set_cairo_package(package: str, version: str):
 
     pyproject_file = "./pyproject.toml"
     settings = toml.load(pyproject_file)
+    if "felucca" not in settings:
+        settings["felucca"] = {}
+        settings["felucca"]["contracts"] = {}
     settings["felucca"]["contracts"][f"{package}"] = version
     with open(pyproject_file) as file:
         toml.dump(settings, file)
@@ -41,3 +48,25 @@ def get_package_name() -> str:
     pyproject_file = "./pyproject.toml"
     settings = toml.load(pyproject_file)
     return settings["tool"]["poetry"]["name"]
+
+
+def install_cairo_package(package):
+    site_packages = site.getsitepackages()
+    norm_package = package.replace("-", "_")
+    package_contracts = os.path.join(site_packages, norm_package)
+    target_dir = f"./{get_package_name()}/{norm_package}"
+    shutil.copytree(package_contracts, target_dir)
+
+    for contract in Path(target_dir).glob("**/*.cairo"):
+        content = contract.read_text()
+        content = content.replace(
+            f"from {norm_package}.", f"from {get_package_name()}.{norm_package}."
+        )
+        contract.write_text(content)
+
+
+def uninstall_cairo_package(package):
+
+    norm_package = package.replace("-", "_")
+    target_dir = f"./{get_package_name()}/{norm_package}"
+    shutil.rmtree(target_dir)
