@@ -51,12 +51,15 @@ def get_package_name() -> str:
 
 
 def install_cairo_package(package):
+    def get_ignored_files(d, filenames):
+        return filter(lambda fname: not fname.endswith("cairo"), filenames)
+
     site_packages = site.getsitepackages()[0]
     norm_package = package.replace("-", "_")
     source_package = get_package_name().replace("-", "_")
     package_contracts = os.path.join(site_packages, norm_package)
     target_dir = f"./{source_package}/{norm_package}"
-    shutil.copytree(package_contracts, target_dir)
+    shutil.copytree(package_contracts, target_dir, ignore=get_ignored_files)
 
     for contract in Path(target_dir).glob("**/*.cairo"):
         content = contract.read_text()
