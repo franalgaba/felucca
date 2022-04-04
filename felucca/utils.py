@@ -32,7 +32,7 @@ def set_cairo_package(package: str, version: str):
         settings["felucca"] = {}
         settings["felucca"]["contracts"] = {}
     settings["felucca"]["contracts"][f"{package}"] = version
-    with open(pyproject_file) as file:
+    with open(pyproject_file, "w") as file:
         toml.dump(settings, file)
 
 
@@ -40,7 +40,7 @@ def remove_cairo_package(package):
     pyproject_file = "./pyproject.toml"
     settings = toml.load(pyproject_file)
     del settings["felucca"]["contracts"][f"{package}"]
-    with open(pyproject_file) as file:
+    with open(pyproject_file, "w") as file:
         toml.dump(settings, file)
 
 
