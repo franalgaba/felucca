@@ -1,6 +1,6 @@
 import requests
 
-from benedict import benedict
+import toml
 
 
 def is_felucca_package(package: str):
@@ -12,24 +12,30 @@ def is_felucca_package(package: str):
     return True if "felucca" in keywords else False
 
 
-def find_dependency_version(package: str):
+def find_dependency_version(package: str) -> str:
 
-    lock = benedict("./poetry.lock")
-    return lock[f"package.{package}.version"]
+    lock = toml.load("./poetry.lock")
+    return lock["package"][f"{package}"]["version"]
 
 
 def set_cairo_package(package: str, version: str):
-    settings = benedict("./pyproject.toml")
-    settings[f"felucca.contracts.{package}"] = version
-    settings.to_toml()
+
+    pyproject_file = "./pyproject.toml"
+    settings = toml.load(pyproject_file)
+    settings["felucca"]["contracts"][f"{package}"] = version
+    with open(pyproject_file) as file:
+        toml.dump(settings, file)
 
 
 def remove_cairo_package(package):
-    settings = benedict("./pyproject.toml")
-    settings.remove(f"felucca.contracts.{package}")
-    settings.to_toml()
+    pyproject_file = "./pyproject.toml"
+    settings = toml.load(pyproject_file)
+    del settings["felucca"]["contracts"][f"{package}"]
+    with open(pyproject_file) as file:
+        toml.dump(settings, file)
 
 
-def get_package_name():
-    settings = benedict("./pyproject.toml")
-    return settings["tool.poetry.name"]
+def get_package_name() -> str:
+    pyproject_file = "./pyproject.toml"
+    settings = toml.load(pyproject_file)
+    return settings["tool"]["poetry"]["name"]

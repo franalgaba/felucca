@@ -84,26 +84,10 @@ colorama = ["colorama (>=0.4.3)"]
 d = ["aiohttp (>=3.3.2)", "aiohttp-cors"]
 
 [[package]]
-name = "cairo-nile"
-version = "0.5.2"
-description = "StarkNet/Cairo development toolbelt"
-category = "dev"
-optional = false
-python-versions = ">=3.7"
-
-[package.dependencies]
-click = ">=8.0,<9.0"
-importlib-metadata = ">=4.0"
-python-dotenv = ">=0.19.2"
-
-[package.extras]
-testing = ["cairo-lang", "setuptools", "tox", "twine", "pytest", "pytest-cov"]
-
-[[package]]
 name = "certifi"
 version = "2021.10.8"
 description = "Python package for providing Mozilla's CA Bundle."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -119,7 +103,7 @@ python-versions = ">=3.6.1"
 name = "charset-normalizer"
 version = "2.0.12"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.5.0"
 
@@ -227,17 +211,6 @@ pycodestyle = ">=2.7.0,<2.8.0"
 pyflakes = ">=2.3.0,<2.4.0"
 
 [[package]]
-name = "ftfy"
-version = "6.1.1"
-description = "Fixes mojibake and other problems with Unicode, after the fact"
-category = "main"
-optional = false
-python-versions = ">=3.7,<4"
-
-[package.dependencies]
-wcwidth = ">=0.2.5"
-
-[[package]]
 name = "gitdb"
 version = "4.0.9"
 description = "Git Object Database"
@@ -275,7 +248,7 @@ license = ["ukkonen"]
 name = "idna"
 version = "3.3"
 description = "Internationalized Domain Names in Applications (IDNA)"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.5"
 
@@ -325,14 +298,6 @@ description = "A fast and thorough lazy object proxy."
 category = "dev"
 optional = false
 python-versions = ">=3.6"
-
-[[package]]
-name = "mailchecker"
-version = "4.1.14"
-description = "Cross-language email validation. Backed by a database of thousands throwable email providers."
-category = "main"
-optional = false
-python-versions = "*"
 
 [[package]]
 name = "mccabe"
@@ -400,14 +365,6 @@ description = "Python Build Reasonableness"
 category = "dev"
 optional = false
 python-versions = ">=2.6"
-
-[[package]]
-name = "phonenumbers"
-version = "8.12.46"
-description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
-category = "main"
-optional = false
-python-versions = "*"
 
 [[package]]
 name = "platformdirs"
@@ -551,70 +508,6 @@ toml = "*"
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
-name = "python-benedict"
-version = "0.25.0"
-description = "python-benedict is a dict subclass with keylist/keypath support, normalized I/O operations (base64, csv, ini, json, pickle, plist, query-string, toml, xml, yaml) and many utilities... for humans, obviously."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-ftfy = ">=6.0.0,<7.0.0"
-mailchecker = ">=4.1.0,<5.0.0"
-phonenumbers = ">=8.12.0,<9.0.0"
-python-dateutil = ">=2.8.0,<3.0.0"
-python-fsutil = ">=0.6.0,<1.0.0"
-python-slugify = ">=6.0.1,<7.0.0"
-pyyaml = ">=6.0,<7.0"
-requests = ">=2.26.0,<3.0.0"
-toml = ">=0.10.2,<1.0.0"
-xmltodict = ">=0.12.0,<1.0.0"
-
-[[package]]
-name = "python-dateutil"
-version = "2.8.2"
-description = "Extensions to the standard Python datetime module"
-category = "main"
-optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
-
-[package.dependencies]
-six = ">=1.5"
-
-[[package]]
-name = "python-dotenv"
-version = "0.20.0"
-description = "Read key-value pairs from a .env file and set them as environment variables"
-category = "dev"
-optional = false
-python-versions = ">=3.5"
-
-[package.extras]
-cli = ["click (>=5.0)"]
-
-[[package]]
-name = "python-fsutil"
-version = "0.6.0"
-description = "file-system utilities for lazy devs."
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
-name = "python-slugify"
-version = "6.1.1"
-description = "A Python slugify application that also handles Unicode"
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
-
-[package.dependencies]
-text-unidecode = ">=1.3"
-
-[package.extras]
-unidecode = ["Unidecode (>=1.1.1)"]
-
-[[package]]
 name = "pyupgrade"
 version = "2.31.1"
 description = "A tool to automatically upgrade syntax for newer versions."
@@ -629,7 +522,7 @@ tokenize-rt = ">=3.2.0"
 name = "pyyaml"
 version = "6.0"
 description = "YAML parser and emitter for Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -645,7 +538,7 @@ python-versions = ">=3.6"
 name = "requests"
 version = "2.27.1"
 description = "Python HTTP for Humans."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
 
@@ -693,7 +586,7 @@ requests = "*"
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
@@ -724,14 +617,6 @@ python-versions = ">=3.6"
 [package.dependencies]
 importlib-metadata = {version = ">=1.7.0", markers = "python_version < \"3.8\""}
 pbr = ">=2.0.0,<2.1.0 || >2.1.0"
-
-[[package]]
-name = "text-unidecode"
-version = "1.3"
-description = "The most basic Text::Unidecode port"
-category = "main"
-optional = false
-python-versions = "*"
 
 [[package]]
 name = "tokenize-rt"
@@ -794,7 +679,7 @@ python-versions = ">=3.6"
 name = "urllib3"
 version = "1.26.9"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
 
@@ -823,28 +708,12 @@ docs = ["proselint (>=0.10.2)", "sphinx (>=3)", "sphinx-argparse (>=0.2.5)", "sp
 testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", "pytest (>=4)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.1)", "pytest-mock (>=2)", "pytest-randomly (>=1)", "pytest-timeout (>=1)", "packaging (>=20.0)"]
 
 [[package]]
-name = "wcwidth"
-version = "0.2.5"
-description = "Measures the displayed width of unicode strings in a terminal"
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "wrapt"
 version = "1.14.0"
 description = "Module for decorators, wrappers and monkey patching."
 category = "dev"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
-
-[[package]]
-name = "xmltodict"
-version = "0.12.0"
-description = "Makes working with XML feel like you are working with JSON"
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "zipp"
@@ -861,7 +730,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.11"
-content-hash = "baf711e0cf67c2825ae7d52d94f6495cc393a4dcb9cd9df793cc5986442e5654"
+content-hash = "7e1a5b7dd2629334bfab7161fe2e60012a62cd6dc17ef335224fe94551b58ff6"
 
 [metadata.files]
 appdirs = [
@@ -886,10 +755,6 @@ bandit = [
 ]
 black = [
     {file = "black-20.8b1.tar.gz", hash = "sha256:1c02557aa099101b9d21496f8a914e9ed2222ef70336404eeeac8edba836fbea"},
-]
-cairo-nile = [
-    {file = "cairo-nile-0.5.2.tar.gz", hash = "sha256:d7c59ec2578854c4d960c62af5a62df84d70573e2edcbb0c37a91223a9413ccd"},
-    {file = "cairo_nile-0.5.2-py3-none-any.whl", hash = "sha256:af055e5b77b5d98ecc91cfb54402a8be1f851818c0368e998579f55fcc304722"},
 ]
 certifi = [
     {file = "certifi-2021.10.8-py2.py3-none-any.whl", hash = "sha256:d62a0163eb4c2344ac042ab2bdf75399a71a2d8c7d47eac2e2ee91b9d6339569"},
@@ -938,10 +803,6 @@ filelock = [
 flake8 = [
     {file = "flake8-3.9.2-py2.py3-none-any.whl", hash = "sha256:bf8fd333346d844f616e8d47905ef3a3384edae6b4e9beb0c5101e25e3110907"},
     {file = "flake8-3.9.2.tar.gz", hash = "sha256:07528381786f2a6237b061f6e96610a4167b226cb926e2aa2b6b1d78057c576b"},
-]
-ftfy = [
-    {file = "ftfy-6.1.1-py3-none-any.whl", hash = "sha256:0ffd33fce16b54cccaec78d6ec73d95ad370e5df5a25255c8966a6147bd667ca"},
-    {file = "ftfy-6.1.1.tar.gz", hash = "sha256:bfc2019f84fcd851419152320a6375604a0f1459c281b5b199b2cd0d2e727f8f"},
 ]
 gitdb = [
     {file = "gitdb-4.0.9-py3-none-any.whl", hash = "sha256:8033ad4e853066ba6ca92050b9df2f89301b8fc8bf7e9324d412a63f8bf1a8fd"},
@@ -1010,9 +871,6 @@ lazy-object-proxy = [
     {file = "lazy_object_proxy-1.7.1-cp39-cp39-win_amd64.whl", hash = "sha256:677ea950bef409b47e51e733283544ac3d660b709cfce7b187f5ace137960d61"},
     {file = "lazy_object_proxy-1.7.1-pp37.pp38-none-any.whl", hash = "sha256:d66906d5785da8e0be7360912e99c9188b70f52c422f9fc18223347235691a84"},
 ]
-mailchecker = [
-    {file = "mailchecker-4.1.14.tar.gz", hash = "sha256:e7c2f0695c18ce3625201dec0243036add455fcc00ec8880601c0f67484c39d1"},
-]
 mccabe = [
     {file = "mccabe-0.6.1-py2.py3-none-any.whl", hash = "sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42"},
     {file = "mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
@@ -1052,10 +910,6 @@ pathspec = [
 pbr = [
     {file = "pbr-5.8.1-py2.py3-none-any.whl", hash = "sha256:27108648368782d07bbf1cb468ad2e2eeef29086affd14087a6d04b7de8af4ec"},
     {file = "pbr-5.8.1.tar.gz", hash = "sha256:66bc5a34912f408bb3925bf21231cb6f59206267b7f63f3503ef865c1a292e25"},
-]
-phonenumbers = [
-    {file = "phonenumbers-8.12.46-py2.py3-none-any.whl", hash = "sha256:ae300d40c3e0b581372294a43b04359b24af94f631dd9451881561d5c702a78d"},
-    {file = "phonenumbers-8.12.46.tar.gz", hash = "sha256:1c440f6336cb49893ff1a8326c70b4df693802ae981f210f545cd4215ac48133"},
 ]
 platformdirs = [
     {file = "platformdirs-2.5.1-py3-none-any.whl", hash = "sha256:bcae7cab893c2d310a711b70b24efb93334febe65f8de776ee320b517471e227"},
@@ -1100,26 +954,6 @@ pyparsing = [
 pytest = [
     {file = "pytest-6.2.5-py3-none-any.whl", hash = "sha256:7310f8d27bc79ced999e760ca304d69f6ba6c6649c0b60fb0e04a4a77cacc134"},
     {file = "pytest-6.2.5.tar.gz", hash = "sha256:131b36680866a76e6781d13f101efb86cf674ebb9762eb70d3082b6f29889e89"},
-]
-python-benedict = [
-    {file = "python-benedict-0.25.0.tar.gz", hash = "sha256:60f50c44c8292bea34e89b7b60f441820228ef05c6d4007098c1c1705137372d"},
-    {file = "python_benedict-0.25.0-py3-none-any.whl", hash = "sha256:ef79be4842adbadc7d4bdc099ad397506a6d240be4be06ced4877abf33a3a2e3"},
-]
-python-dateutil = [
-    {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
-    {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
-]
-python-dotenv = [
-    {file = "python-dotenv-0.20.0.tar.gz", hash = "sha256:b7e3b04a59693c42c36f9ab1cc2acc46fa5df8c78e178fc33a8d4cd05c8d498f"},
-    {file = "python_dotenv-0.20.0-py3-none-any.whl", hash = "sha256:d92a187be61fe482e4fd675b6d52200e7be63a12b724abbf931a40ce4fa92938"},
-]
-python-fsutil = [
-    {file = "python-fsutil-0.6.0.tar.gz", hash = "sha256:e684aa34ecd7f28adf35036e60f3baa8409ce1944d81c027832b1ed6cf1c742f"},
-    {file = "python_fsutil-0.6.0-py3-none-any.whl", hash = "sha256:6ddafa5d26005ac4a92fdb12a4d61269810554f9c5538d3e8e618da42a65a8ba"},
-]
-python-slugify = [
-    {file = "python-slugify-6.1.1.tar.gz", hash = "sha256:00003397f4e31414e922ce567b3a4da28cf1436a53d332c9aeeb51c7d8c469fd"},
-    {file = "python_slugify-6.1.1-py2.py3-none-any.whl", hash = "sha256:8c0016b2d74503eb64761821612d58fcfc729493634b1eb0575d8f5b4aa1fbcf"},
 ]
 pyupgrade = [
     {file = "pyupgrade-2.31.1-py2.py3-none-any.whl", hash = "sha256:4060a7c20c79d373a3dcf34566b275c6de6cd2b034ad22465d3263fb0de82648"},
@@ -1264,10 +1098,6 @@ stevedore = [
     {file = "stevedore-3.5.0-py3-none-any.whl", hash = "sha256:a547de73308fd7e90075bb4d301405bebf705292fa90a90fc3bcf9133f58616c"},
     {file = "stevedore-3.5.0.tar.gz", hash = "sha256:f40253887d8712eaa2bb0ea3830374416736dc8ec0e22f5a65092c1174c44335"},
 ]
-text-unidecode = [
-    {file = "text-unidecode-1.3.tar.gz", hash = "sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93"},
-    {file = "text_unidecode-1.3-py2.py3-none-any.whl", hash = "sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8"},
-]
 tokenize-rt = [
     {file = "tokenize_rt-4.2.1-py2.py3-none-any.whl", hash = "sha256:08a27fa032a81cf45e8858d0ac706004fcd523e8463415ddf1442be38e204ea8"},
     {file = "tokenize_rt-4.2.1.tar.gz", hash = "sha256:0d4f69026fed520f8a1e0103aa36c406ef4661417f20ca643f913e33531b3b94"},
@@ -1327,10 +1157,6 @@ urllib3 = [
 virtualenv = [
     {file = "virtualenv-20.14.0-py2.py3-none-any.whl", hash = "sha256:1e8588f35e8b42c6ec6841a13c5e88239de1e6e4e4cedfd3916b306dc826ec66"},
     {file = "virtualenv-20.14.0.tar.gz", hash = "sha256:8e5b402037287126e81ccde9432b95a8be5b19d36584f64957060a3488c11ca8"},
-]
-wcwidth = [
-    {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
-    {file = "wcwidth-0.2.5.tar.gz", hash = "sha256:c4d647b99872929fdb7bdcaa4fbe7f01413ed3d98077df798530e5b04f116c83"},
 ]
 wrapt = [
     {file = "wrapt-1.14.0-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:5a9a1889cc01ed2ed5f34574c90745fab1dd06ec2eee663e8ebeefe363e8efd7"},
@@ -1397,10 +1223,6 @@ wrapt = [
     {file = "wrapt-1.14.0-cp39-cp39-win32.whl", hash = "sha256:2eca15d6b947cfff51ed76b2d60fd172c6ecd418ddab1c5126032d27f74bc350"},
     {file = "wrapt-1.14.0-cp39-cp39-win_amd64.whl", hash = "sha256:bb36fbb48b22985d13a6b496ea5fb9bb2a076fea943831643836c9f6febbcfdc"},
     {file = "wrapt-1.14.0.tar.gz", hash = "sha256:8323a43bd9c91f62bb7d4be74cc9ff10090e7ef820e27bfe8815c57e68261311"},
-]
-xmltodict = [
-    {file = "xmltodict-0.12.0-py2.py3-none-any.whl", hash = "sha256:8bbcb45cc982f48b2ca8fe7e7827c5d792f217ecf1792626f808bf41c3b86051"},
-    {file = "xmltodict-0.12.0.tar.gz", hash = "sha256:50d8c638ed7ecb88d90561beedbf720c9b4e851a9fa6c47ebd64e99d166d8a21"},
 ]
 zipp = [
     {file = "zipp-3.7.0-py3-none-any.whl", hash = "sha256:b47250dd24f92b7dd6a0a8fc5244da14608f3ca90a5efcd37a3b1642fac9a375"},
