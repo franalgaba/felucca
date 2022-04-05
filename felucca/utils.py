@@ -1,10 +1,46 @@
 import site
 import os
 import shutil
+import subprocess
 from pathlib import Path
 
 import requests
 import toml
+import typer
+
+
+def execute_subprocess(command: str, **kwargs) -> None:
+    """
+    Execute a subprocess given a command
+
+    Args:
+        command (str): command to execute
+        kwargs: extra args for subprocess
+
+    Raises:
+        Exit: if the command fails
+    """
+
+    try:
+        subprocess.run(
+            command, shell=True, universal_newlines=True, check=True, **kwargs
+        )
+    except subprocess.CalledProcessError:
+        raise typer.Exit(code=1)
+
+
+def execute_poetry(command: str) -> None:
+    """
+    Execute a poetry command with subprocess
+
+    Args:
+        command (str): command to execute
+    """
+
+    poetry = "$HOME/.poetry/bin/poetry"
+    if "POETRY_HOME" in os.environ:
+        poetry = "$POETRY_HOME/bin/poetry"
+    execute_subprocess(f"{poetry} {command}")
 
 
 def is_felucca_package(package: str):
