@@ -15,12 +15,21 @@ from felucca.utils import (
     uninstall_cairo_package,
 )
 
-app = typer.Typer()
+app = typer.Typer(help="Felucca - Package Management for Cairo")
 _console = Console()
 
 
 @app.command()
-def install(package: str):
+def install(
+    package: str = typer.Argument(..., help="Name of the Cairo package from pypi")
+):
+
+    """
+    Install a Cairo package
+
+    Args:
+        package (str): Name of the Cairo package to uninstall from project
+    """
     if is_felucca_package(package):
         with _console.status(f"[bold green] Installing {package}..."):
             execute_poetry(f"-q add {package}")
@@ -37,7 +46,17 @@ def install(package: str):
 
 
 @app.command()
-def uninstall(package: str):
+def uninstall(
+    package: str = typer.Argument(
+        ..., help="Name of the Cairo package to uninstall from project"
+    )
+):
+    """
+    Uninstall a Cairo package
+
+    Args:
+        package (str): Name of the Cairo package to uninstall from project
+    """
     if is_felucca_package(package):
         with _console.status(f"[bold green] Uninstalling {package}..."):
             execute_poetry(f"-q remove {package}")
@@ -51,6 +70,14 @@ def uninstall(package: str):
 
 @app.command()
 def setup():
+    """
+    Make an existing Cairo package compatible with Felucca
+
+    Raises:
+        typer.Exit: if Poetry not installed
+        typer.Exit: if not pyproject.toml file exists
+        typer.Exit: if Poetry is not used in pyproject.toml
+    """
 
     try:
         execute_poetry("-q")
@@ -93,7 +120,13 @@ def setup():
 
 
 @app.command()
-def new(name: str):
+def new(name: str = typer.Argument(..., help="Name of the Cairo package to create")):
+    """
+    Create a Cairo package project structure
+
+    Args:
+        name (str): Cairo package name to create
+    """
     cookiecutter(
         "https://github.com/franalgaba/felucca-package-template.git",
         extra_context={"project_name": name},

@@ -44,6 +44,15 @@ def execute_poetry(command: str) -> None:
 
 
 def is_felucca_package(package: str):
+    """
+    Check if package from pypi is a Felucca package
+
+    Args:
+        package (str): pacakge name from pypi
+
+    Returns:
+        bool: true if compatible false otherwise
+    """
 
     url = "https://pypi.org/pypi"
     response = requests.get(f"{url}/{package}/json").json()
@@ -53,6 +62,15 @@ def is_felucca_package(package: str):
 
 
 def find_dependency_version(package: str) -> str:
+    """
+    Find dependency version from lock file
+
+    Args:
+        package (str): package to find
+
+    Returns:
+        str: version of the package
+    """
 
     lock = toml.load("./poetry.lock")
     for package_details in lock["package"]:
@@ -61,6 +79,13 @@ def find_dependency_version(package: str) -> str:
 
 
 def set_cairo_package(package: str, version: str):
+    """
+    Set specific Cairo package version installed in pyproject.toml
+
+    Args:
+        package (str): package name
+        version (str): package version
+    """
 
     pyproject_file = "./pyproject.toml"
     settings = toml.load(pyproject_file)
@@ -72,7 +97,13 @@ def set_cairo_package(package: str, version: str):
         toml.dump(settings, file)
 
 
-def remove_cairo_package(package):
+def remove_cairo_package(package: str):
+    """
+    Remove Cairo package from project
+
+    Args:
+        package (str): name of the package
+    """
     pyproject_file = "./pyproject.toml"
     settings = toml.load(pyproject_file)
     del settings["felucca"]["contracts"][f"{package}"]
@@ -81,12 +112,25 @@ def remove_cairo_package(package):
 
 
 def get_package_name() -> str:
+    """
+
+    Get current Cairo package name
+
+    Returns:
+        str: current Cairo package name
+    """
     pyproject_file = "./pyproject.toml"
     settings = toml.load(pyproject_file)
     return settings["tool"]["poetry"]["name"]
 
 
-def install_cairo_package(package):
+def install_cairo_package(package: str):
+    """
+    Install Cairo contracts from package in project
+
+    Args:
+        package (str): package to install
+    """
 
     site_packages = site.getsitepackages()[0]
     norm_package = package.replace("-", "_")
@@ -108,6 +152,12 @@ def install_cairo_package(package):
 
 
 def uninstall_cairo_package(package):
+    """
+    Uninstall Cairo contracts from package in project
+
+    Args:
+        package (str): package to uninstall
+    """
 
     norm_package = package.replace("-", "_")
     target_dir = f"./{get_package_name()}/{norm_package}"
