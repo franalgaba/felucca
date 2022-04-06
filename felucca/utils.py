@@ -72,6 +72,12 @@ def find_dependency_version(package: str) -> str:
         str: version of the package
     """
 
+    if not os.path.isfile("./poetry.lock"):
+        try:
+            execute_poetry("install")
+        except typer.Exit:
+            raise typer.Exit()
+
     lock = toml.load("./poetry.lock")
     for package_details in lock["package"]:
         if package in package_details["name"]:
