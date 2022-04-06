@@ -31,14 +31,13 @@ def install(
         package (str): Name of the Cairo package to uninstall from project
     """
     if is_felucca_package(package):
-        with _console.status(f"[bold green] Installing {package}..."):
-            try:
-                execute_poetry(f"add {package}")
-            except typer.Exit:
-                raise typer.Exit()
-            version = find_dependency_version(package)
-            set_cairo_package(package, version)
-            install_cairo_package(package)
+        try:
+            execute_poetry(f"add {package}")
+        except typer.Exit:
+            raise typer.Exit()
+        version = find_dependency_version(package)
+        set_cairo_package(package, version)
+        install_cairo_package(package)
         _console.print(
             f"[green]:heavy_check_mark: Done![/green] [bold]{package}[/bold] successfully installed :rocket:"
         )
@@ -61,18 +60,17 @@ def uninstall(
         package (str): Name of the Cairo package to uninstall from project
     """
     if is_felucca_package(package):
-        with _console.status(f"[bold green] Uninstalling {package}..."):
-            try:
-                execute_poetry(f"remove {package}")
-            except typer.Exit:
-                raise typer.Exit()
+        try:
+            execute_poetry(f"remove {package}")
+        except typer.Exit:
+            raise typer.Exit()
 
-            version = find_dependency_version(package)
-            set_cairo_package(package, version)
-            uninstall_cairo_package(package)
-        _console.print(
-            "[green]:heavy_check_mark: Done![/green] [bold]{package}[/bold] successfully uninstalled :rocket:"
-        )
+        version = find_dependency_version(package)
+        set_cairo_package(package, version)
+        uninstall_cairo_package(package)
+    _console.print(
+        "[green]:heavy_check_mark: Done![/green] [bold]{package}[/bold] successfully uninstalled :rocket:"
+    )
 
 
 @app.command()
