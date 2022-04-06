@@ -143,12 +143,13 @@ def install_cairo_package(package: str):
     source_package = get_package_name().replace("-", "_")
     package_contracts = os.path.join(site_packages, norm_package)
     target_dir = f"./{source_package}/{norm_package}"
-    shutil.copytree(
-        package_contracts,
-        target_dir,
-        dirs_exist_ok=True,
-        ignore=shutil.ignore_patterns("__pycache__", "*.py"),
-    )
+
+    if not os.path.exists(target_dir):
+        shutil.copytree(
+            package_contracts,
+            target_dir,
+            ignore=shutil.ignore_patterns("__pycache__", "*.py"),
+        )
 
     for contract in Path(target_dir).glob("**/*.cairo"):
         content = contract.read_text()
