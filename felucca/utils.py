@@ -146,6 +146,7 @@ def install_cairo_package(package: str):
     shutil.copytree(
         package_contracts,
         target_dir,
+        dirs_exist_ok=True,
         ignore=shutil.ignore_patterns("__pycache__", "*.py"),
     )
 

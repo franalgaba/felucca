@@ -69,7 +69,7 @@ def uninstall(
         set_cairo_package(package, version)
         uninstall_cairo_package(package)
     _console.print(
-        "[green]:heavy_check_mark: Done![/green] [bold]{package}[/bold] successfully uninstalled :rocket:"
+        f"[green]:heavy_check_mark: Done![/green] [bold]{package}[/bold] successfully uninstalled :rocket:"
     )
 
 
