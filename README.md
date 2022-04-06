@@ -1,6 +1,7 @@
 # Felucca: Dependency Management for Cairo
 
 [![Tests and release](https://github.com/franalgaba/felucca/actions/workflows/release.yml/badge.svg)](https://github.com/franalgaba/felucca/actions/workflows/release.yml)
+[![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1kkrvP-LPoXlkEjeA80E4XYxOcXzbWIFF?usp=sharing)
 
 Felucca helps you declare, manage and install dependencies of Cairo projects, ensuring you have the right stack everywhere.
 
