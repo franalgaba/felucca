@@ -7,7 +7,7 @@ Felucca helps you declare, manage and install dependencies of Cairo projects, en
 
 # Installation
 
-It supports Python 3.7+:
+It supports Python 3.9+:
 
 `pip install felucca`
 
