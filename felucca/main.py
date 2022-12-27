@@ -135,6 +135,7 @@ def new(name: str = typer.Argument(..., help="Name of the Cairo package to creat
     cookiecutter(
         "https://github.com/franalgaba/felucca-package-template.git",
         extra_context={"project_name": name},
+        checkout="v0.10.3"
     )
 
 
