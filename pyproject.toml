@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "felucca"
-version = "0.2.4"
+version = "0.2.5"
 description = "Cairo dependency management and packaging made easy."
 readme = "README.md"
 authors = [ "Fran Algaba <f.algaba.work@gmail.com>",]

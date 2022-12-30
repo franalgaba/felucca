@@ -147,9 +147,9 @@ def clean_cairo_package(package: str):
         raise typer.Exit(f"Package {package} is not installed")
 
     locations = settings["felucca"]["contracts"][package]["location"]
-    package_name = get_package_name()
+    norm_package = get_package_name().replace("-", "_")
     for loc in locations:
-        shutil.rmtree(os.path.join(package_name, loc))
+        shutil.rmtree(os.path.join(norm_package, loc))
     del settings["felucca"]["contracts"][package]
     with open(pyproject_file, "w") as file:
         toml.dump(settings, file)
