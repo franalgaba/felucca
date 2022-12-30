@@ -4,11 +4,11 @@ import typer
 import toml
 from rich.console import Console
 from cookiecutter.main import cookiecutter
+
 from felucca.backend.protostar import (
     install_protostar_contracts,
 )
 from felucca.backend.python_package import install_contracts
-
 from felucca.core.enums import Backends
 from felucca.core.utils import (
     clean_cairo_package,

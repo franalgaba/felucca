@@ -9,6 +9,10 @@ from felucca.core.utils import (
 
 
 def remove_installation_metadata():
+    """
+    Remove all the installation metadata from
+    Python packages
+    """
     root_dir = get_package_name()
 
     extension = ".dist-info"
@@ -22,7 +26,16 @@ def remove_installation_metadata():
                 shutil.rmtree(os.path.join(root, name))
 
 
-def install_contracts(package: str, version):
+def install_contracts(package: str, version: str):
+    """Install contracts packaged in the Python wheel
+
+    Args:
+        package (str): package name
+        version (str): version of the package
+
+    Returns:
+        list: list with the contracts location
+    """
 
     package_name = get_package_name()
     command = f"install {package}"

@@ -67,6 +67,14 @@ def execute_setuptools(command: str, **kwargs) -> None:
 
 
 def is_package_installed(package: str) -> bool:
+    """Check if a specific Python package is installed
+
+    Args:
+        package (str): name of the package to check
+
+    Returns:
+        bool: if the package is present in the system
+    """
     return shutil.which(package)
 
 
@@ -89,6 +97,14 @@ def is_felucca_package(package: str) -> bool:
 
 
 def get_package_location(package: str) -> str:
+    """Get the package location from the site-packages
+
+    Args:
+        package (str): package name
+
+    Returns:
+        str: path of the installed package
+    """
     site_packages = site.getsitepackages()[0]
     norm_package = package.replace("-", "_")
     for package in os.walk(site_packages):
@@ -98,36 +114,30 @@ def get_package_location(package: str) -> str:
     return contracts_package
 
 
-def is_poetry_package(package: str) -> bool:
-    contracts_package = get_package_location(package)
-    pyproject_path = os.path.join(contracts_package, "pyproject.toml")
-
-    if os.path.isfile(pyproject_path):
-        pyproject = toml.load(pyproject_path)
-        return True if "poetry" in pyproject["tool"] else False
-    else:
-        return False
-
-
-def is_setuptools_package(package: str) -> bool:
-    contracts_package = get_package_location(package)
-    pyproject_path = os.path.join(contracts_package, "pyproject.toml")
-    setup_py_path = os.path.join(contracts_package, "setup.py")
-
-    if os.path.isfile(pyproject_path):
-        pyproject = toml.load("./pyproject.toml")
-        return True if "setuptools" in pyproject["tool"] else False
-    else:
-        return False
-
-
 def is_protostar_package(package: str) -> bool:
+    """Check if the package is a Protostar repo
+
+    Args:
+        package (str): repository location
+
+    Returns:
+        bool: if the package name is a protostar repo
+    """
     # Match protostar Git repo specification
     pattern = r"^[\w-]+/[\w-]+(@v\d+\.\d+\.\d+)?$"
     return re.match(pattern, package)
 
 
 def clean_cairo_package(package: str):
+    """Clean installed Cairo packages
+
+    Args:
+        package (str): name of the package
+
+    Raises:
+        Exit: if felucca is not setup
+        Exit: if the package is not installed
+    """
     pyproject_file = "./pyproject.toml"
     settings = toml.load(pyproject_file)
 
@@ -154,6 +164,8 @@ def set_cairo_package(
     Args:
         package (str): package name
         version (str): package version
+        contract_type (str): type of the package
+        contracts_location (str): location of the contracts
     """
 
     pyproject_file = "./pyproject.toml"

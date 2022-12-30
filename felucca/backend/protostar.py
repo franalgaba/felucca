@@ -3,28 +3,22 @@ import shutil
 import tempfile
 
 import git
-import toml
 
 from felucca.core.utils import (
     get_package_name,
 )
 
 
-def remove_installation_metadata():
-    root_dir = get_package_name()
-
-    extension = ".dist-info"
-
-    # Search for the folder in the root directory
-    for root, dirs, files in os.walk(root_dir):
-        for name in dirs:
-            # Check if the current folder matches the desired name
-            if name.endswith(extension):
-                # Remove the folder
-                shutil.rmtree(os.path.join(root, name))
-
-
 def install_protostar_contracts(package: str, version):
+    """Install contracts from Protostar repository
+
+    Args:
+        package (str): package name
+        version (str): version of the package
+
+    Returns:
+        list: list with the contracts location
+    """
 
     # Create a temporary directory
     temp_dir = tempfile.TemporaryDirectory()
