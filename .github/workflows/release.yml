@@ -46,5 +46,13 @@ jobs:
       - name: Test
         run: poetry run pytest tests
 
+      - name: Check for version changes
+        run: |
+          old_version=$(git show HEAD^:pyproject.toml | grep '^version =' | sed 's/version = "//' | sed 's/"$//')
+          new_version=$(grep '^version =' pyproject.toml | sed 's/version = "//' | sed 's/"$//')
+          if [ "$old_version" = "$new_version" ]; then
+            exit 0
+          fi
+
       - name: Release
         run: poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }} && poetry publish --build
