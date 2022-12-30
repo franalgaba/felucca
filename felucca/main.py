@@ -4,8 +4,8 @@ import typer
 import toml
 from rich.console import Console
 from cookiecutter.main import cookiecutter
-from felucca.backend.poetry import (
-    uninstall_cairo_package,
+from felucca.backend.protostar import (
+    install_protostar_contracts,
 )
 from felucca.backend.python_package import install_contracts
 
@@ -41,7 +41,12 @@ def install(
         version (str): Version of the Cairo package to install
     """
 
-    if not is_felucca_package(package):
+    try:
+        if not is_felucca_package(package):
+            _console.print(
+                f"Package {package} is not a felucca package. Use `setup` for full compatibility and package awareness"
+            )
+    except Exception:
         _console.print(
             f"Package {package} is not a felucca package. Use `setup` for full compatibility and package awareness"
         )
@@ -49,8 +54,10 @@ def install(
     try:
 
         if is_protostar_package(package):
-            _console.print("Soon!")
+            contracts_location = install_protostar_contracts(package, version)
             contract_type = Backends.protostar
+            if version is None:
+                version = "main"
         else:
             try:
                 contracts_location = install_contracts(package, version)
@@ -67,7 +74,7 @@ def install(
 
             if version is None:
                 version = find_dependency_version(package)
-            set_cairo_package(package, version, contract_type, contracts_location)
+        set_cairo_package(package, version, contract_type, contracts_location)
 
     except typer.Exit:
         raise typer.Exit()
@@ -90,13 +97,19 @@ def uninstall(
         package (str): Name of the Cairo package to uninstall from project
     """
 
-    if not is_felucca_package(package):
+    try:
+        if not is_felucca_package(package):
+            _console.print(
+                f"Package {package} is not a felucca package. Use `setup` for full compatibility and package awareness"
+            )
+    except Exception:
         _console.print(
             f"Package {package} is not a felucca package. Use `setup` for full compatibility and package awareness"
         )
 
     try:
-        execute_poetry(f"remove {package}")
+        if not is_protostar_package(package):
+            execute_poetry(f'remove {package.replace("_", "-")}')
     except typer.Exit:
         raise typer.Exit()
 

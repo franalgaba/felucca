@@ -1,6 +1,5 @@
 import os
 import shutil
-import site
 import subprocess
 
 from felucca.core.utils import (
