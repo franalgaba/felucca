@@ -4,15 +4,20 @@ import typer
 import toml
 from rich.console import Console
 from cookiecutter.main import cookiecutter
-
-from felucca.utils import (
-    execute_poetry,
-    find_dependency_version,
-    get_package_name,
-    install_cairo_package,
-    is_felucca_package,
-    set_cairo_package,
+from felucca.backend.poetry import (
     uninstall_cairo_package,
+)
+from felucca.backend.python_package import install_contracts
+
+from felucca.core.enums import Backends
+from felucca.core.utils import (
+    clean_cairo_package,
+    execute_poetry,
+    get_package_name,
+    is_felucca_package,
+    is_protostar_package,
+    set_cairo_package,
+    find_dependency_version,
 )
 
 app = typer.Typer(help="Felucca - Package Management for Cairo")
@@ -21,30 +26,55 @@ _console = Console()
 
 @app.command()
 def install(
-    package: str = typer.Argument(..., help="Name of the Cairo package from pypi")
+    package: str = typer.Argument(..., help="Name of the Cairo package from pypi"),
+    version: str = typer.Argument(None, help="Version of the Cairo package to install"),
 ):
-
     """
     Install a Cairo package
 
+    Raises:
+        Exit: if there is an exception during installation.
+        TypeError: requested package is not of supported types
+
     Args:
         package (str): Name of the Cairo package to uninstall from project
+        version (str): Version of the Cairo package to install
     """
-    if is_felucca_package(package):
-        try:
-            execute_poetry(f"add {package}")
-        except typer.Exit:
-            raise typer.Exit()
-        version = find_dependency_version(package)
-        set_cairo_package(package, version)
-        install_cairo_package(package)
+
+    if not is_felucca_package(package):
         _console.print(
-            f"[green]:heavy_check_mark: Done![/green] [bold]{package}[/bold] successfully installed :rocket:"
+            f"Package {package} is not a felucca package. Use `setup` for full compatibility and package awareness"
         )
-    else:
-        _console.print(
-            f"Installation aborted. [bold]{package}[/bold] is not a Cairo package :sweat:"
-        )
+
+    try:
+
+        if is_protostar_package(package):
+            _console.print("Soon!")
+            contract_type = Backends.protostar
+        else:
+            try:
+                contracts_location = install_contracts(package, version)
+                contract_type = Backends.python
+            except Exception:
+                raise TypeError(
+                    "Requested package is not compatible. Available compatibility: python, protostar"
+                )
+
+            command = f"add {package}"
+            if version is not None:
+                command += f"=={version}"
+            execute_poetry(command)
+
+            if version is None:
+                version = find_dependency_version(package)
+            set_cairo_package(package, version, contract_type, contracts_location)
+
+    except typer.Exit:
+        raise typer.Exit()
+
+    _console.print(
+        f"[green]:heavy_check_mark: Done![/green] [bold]{package}[/bold] successfully installed :rocket:"
+    )
 
 
 @app.command()
@@ -59,15 +89,19 @@ def uninstall(
     Args:
         package (str): Name of the Cairo package to uninstall from project
     """
-    if is_felucca_package(package):
-        try:
-            execute_poetry(f"remove {package}")
-        except typer.Exit:
-            raise typer.Exit()
 
-        version = find_dependency_version(package)
-        set_cairo_package(package, version)
-        uninstall_cairo_package(package)
+    if not is_felucca_package(package):
+        _console.print(
+            f"Package {package} is not a felucca package. Use `setup` for full compatibility and package awareness"
+        )
+
+    try:
+        execute_poetry(f"remove {package}")
+    except typer.Exit:
+        raise typer.Exit()
+
+    clean_cairo_package(package)
+
     _console.print(
         f"[green]:heavy_check_mark: Done![/green] [bold]{package}[/bold] successfully uninstalled :rocket:"
     )
@@ -135,7 +169,7 @@ def new(name: str = typer.Argument(..., help="Name of the Cairo package to creat
     cookiecutter(
         "https://github.com/franalgaba/felucca-package-template.git",
         extra_context={"project_name": name},
-        checkout="v0.10.3"
+        checkout="v0.10.3",
     )
 
 

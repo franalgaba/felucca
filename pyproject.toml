@@ -1,7 +1,5 @@
-# Poetry pyproject.toml: https://python-poetry.org/docs/pyproject/
-
 [build-system]
-requires = ["poetry_core>=1.0.0"]
+requires = [ "poetry_core>=1.0.0",]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
@@ -9,16 +7,12 @@ name = "felucca"
 version = "0.1.6"
 description = "Cairo dependency management and packaging made easy."
 readme = "README.md"
-authors = [
-  "Fran Algaba <f.algaba.work@gmail.com>"
-]
+authors = [ "Fran Algaba <f.algaba.work@gmail.com>",]
 license = "MIT"
-keywords = ["packaging", "dependency", "poetry"]
-# Pypi classifiers: https://pypi.org/classifiers/
-classifiers = [
-    "Topic :: Software Development :: Build Tools",
-    "Topic :: Software Development :: Libraries :: Python Modules"
-]
+keywords = [ "packaging", "dependency", "poetry",]
+classifiers = [ "Topic :: Software Development :: Build Tools", "Topic :: Software Development :: Libraries :: Python Modules",]
+
+[felucca.contracts]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.10"
