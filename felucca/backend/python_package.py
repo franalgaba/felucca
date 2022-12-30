@@ -43,9 +43,10 @@ def install_contracts(package: str, version: str):
         command += f"=={version}"
     command += f" --no-deps --target {package_name} --quiet"
 
-    before = os.listdir(package_name)
+    norm_package = package.replace("-", "_")
+    before = os.listdir(norm_package)
     execute_setuptools(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     remove_installation_metadata()
-    after = os.listdir(package_name)
+    after = os.listdir(norm_package)
 
     return set(after).difference(before)
